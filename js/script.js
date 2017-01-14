@@ -3,7 +3,8 @@ var screenContent = '';
 
 document.getElementById("output-bar").addEventListener("input", function(){
 	var inputValue = document.getElementById("output-bar").value;
-    screenContent = inputValue;
+	setOutputBar(checkForLetters(inputValue));
+	screenContent = checkForLetters(inputValue);
 });
 
 document.getElementById("output-bar").addEventListener("keyup", function
@@ -31,11 +32,31 @@ function clearOutputBox () {
 function calculate () {
 	try {
 		var calculation = eval(screenContent);
-		setOutputBar(calculation);
-		screenContent = calculation; 	
+		if (!(calculation === undefined)){
+			setOutputBar(calculation);
+			screenContent = calculation; 
+		} else {
+			alert('Invalid Input');
+			alert(calculation);
+		}
 	} catch(e) {
 		if (e instanceof SyntaxError) {
 			alert('Invalid Input');
 		}
 	}
+
+}
+
+function checkForLetters (str) {
+
+	// Removes letters and symbols
+	if (str.match(/[a-z]/i) || str.match(/[`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\]/gi, '')) {
+    	str = str.replace(/[a-z]/,'');
+    	str = str.replace(/([A-Z])/g, '');
+    	str = str.replace(/[`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\]/gi, '');
+    	return str;
+	} else {
+		return str;
+	}
+
 }
