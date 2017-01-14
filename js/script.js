@@ -29,7 +29,13 @@ function clearOutputBox () {
 }
 
 function calculate () {
-	var calculation = eval(screenContent);
-	setOutputBar(calculation);
-	screenContent = calculation; 
+	try {
+		var calculation = eval(screenContent);
+		setOutputBar(calculation);
+		screenContent = calculation; 	
+	} catch(e) {
+		if (e instanceof SyntaxError) {
+			alert('Invalid Input');
+		}
+	}
 }
