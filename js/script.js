@@ -1,9 +1,18 @@
 var output = 0;
 var screenContent = '';
 
-document.getElementById("button-1").addEventListener("click", function(){
-
+document.getElementById("output-bar").addEventListener("input", function(){
+	var inputValue = document.getElementById("output-bar").value;
+    screenContent = inputValue;
 });
+
+document.getElementById("output-bar").addEventListener("keyup", function
+	(event){
+		event.preventDefault();
+		if (event.keyCode == 13) {
+			calculate();
+		}
+	});
 
 function putCharacter (character) {
 	screenContent += character;
